@@ -1,6 +1,31 @@
 [
 
-    {"fullName": "Fatema nn Summe Nur ",
+    {"id":1,
+    "fullName": "Fatema nn Summe Nur ",
+     "className": 2,
+      "division": "A", 
+     "rollNumber": "66", 
+     "addressLine1": "Fotika",
+    "addressLine2": "Kamal Para",
+    "city": "Nur mention",
+    "landmark": "g",
+    "pincode": "4330"
+
+  },
+    {"id":2,
+    "fullName": "Fatema nn Summe Nur ",
+     "className": 2,
+      "division": "A", 
+     "rollNumber": "66", 
+     "addressLine1": "Fotika",
+    "addressLine2": "Kamal Para",
+    "city": "Nur mention",
+    "landmark": "g",
+    "pincode": "4330"
+
+  },
+    {"id":3,
+     "fullName": "Fatema nn Summe Nur ",
      "className": 2,
       "division": "A", 
      "rollNumber": "66", 

@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
                 element:<StudentTable/>
             },
             {
-                path:'/addstudent',
+                path:'/add-student',
                 element:<AddStudentForm/>
             }
         ]

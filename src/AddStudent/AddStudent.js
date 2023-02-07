@@ -7,7 +7,8 @@ import {
   InputLabel,
   TextareaAutosize,
   Button,
-  Grid
+  Grid,
+  alertClasses
 //   Input,
 //   Typography
 } from '@mui/material';
@@ -26,16 +27,20 @@ function AddStudentForm() {
   const [pincode, setPincode] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
 
+  
+
+
+
   function handleSubmit(event) {
     event.preventDefault();
-    // You can add code here to submit the form data to your database
+    // You can add code here to submit the form data to your databa
     const fullName =`${firstName} ${middleName} ${lastName} `;
-    const data = {
+    const classDevision =`${className}-${division}`
+    const studentData = {
     
           
           fullName,
-            className,
-            division,
+          classDevision,
             rollNumber,
             addressLine1,
             addressLine2,
@@ -43,7 +48,26 @@ function AddStudentForm() {
             city,
             pincode
     }
-console.log(data);
+    fetch("http://localhost:5000/add-student", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(studentData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert(`You have added a post successfully`);
+        
+        } else {
+         alert("Error");
+        }
+      })
+      .catch((err) => alert(err));
+ 
+
+
 }
 
   return (
@@ -82,7 +106,9 @@ console.log(data);
               value={className}
               onChange={event => setClassName(event.target.value)}
             >
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(classNum => (
+              {
+              
+              ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"].map(classNum =>(
                 <MenuItem key={classNum} value={classNum}>
                   {classNum}
                 </MenuItem>
@@ -112,6 +138,7 @@ console.log(data);
       <TextField
         label="Roll Number"
         value={rollNumber}
+        type='number'
         onChange={event => setRollNumber(event.target.value)}
       fullWidth
         inputProps={{
