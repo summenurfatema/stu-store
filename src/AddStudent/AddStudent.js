@@ -33,7 +33,7 @@ function AddStudentForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // You can add code here to submit 
+    // You can add code here to su 
     const fullName =`${firstName} ${middleName} ${lastName} `;
     const classDevision =`${className}-${division}`
     const studentData = {
