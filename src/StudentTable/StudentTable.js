@@ -57,7 +57,7 @@ fetch('datas.json')
                       <TableCell align="right">{row.rollNumber}</TableCell>
                       <TableCell align="right">
                              <RemoveRedEyeIcon/> 
-                               <Link to='/add-student'><EditIcon /></Link>
+                               <Link to='/add-student'><EditIcon/></Link>
                                <DeleteIcon/>
                         </TableCell>
                     </TableRow>)
