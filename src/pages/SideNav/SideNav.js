@@ -1,7 +1,8 @@
 import { Grid, Button } from '@material-ui/core';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
+import { AuthContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
   root: {
@@ -18,27 +19,33 @@ const useStyles = makeStyles({
     marginBottom: "16px"
   },
   btn:{
-width:'300px'
+    backgroundColor:"#F62F76",
+    color:"white",
+width:'200px'
    
   }
 });
 
 const SideNav = () => {
-    const [color, setColor] = useState("#fff");
-    const classes = useStyles({ color });
+  const classes = useStyles();
+
+  const {logOut} = useContext(AuthContext)
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+      logOut().then(() => {
+        navigate("/login");
+      });
+    };
+
     return (
-      <div>
-
-<div></div>
-
-        {/* lg */}
-        <div style={{padding:'15px'}}>
+    
+        <div  style={{padding:'15px'}}>
               <Grid container direction="column" alignItems='flex-start' >
         <Grid item xs={9}>
-       <Link style={{textDecoration:'none'}} to='/addstudent'>
+       <Link style={{textDecoration:'none'}} to='/add-student'>
        <Button  fullWidth variant="text"
       className={[classes.root,classes.btn].join(" ")}
-      onClick={() => setColor("#0069d9")}  >
+       >
     Add a student
       </Button>
        </Link>
@@ -48,7 +55,7 @@ const SideNav = () => {
           <Link style={{textDecoration:'none'}}  to='/'>
           <Button variant="text"fullWidth
       className={[classes.root, classes.pad,classes.btn].join(" ")}
-      onClick={() => setColor("#0069d9")} >
+      >
         Manage Student
       </Button>
        </Link>
@@ -57,17 +64,17 @@ const SideNav = () => {
       </Grid>
         <Grid className={classes.btn} fullWidth  item xs={9}>
 
-        <Button  fullWidth   variant="text" 
+        <Button onClick={handleLogOut} fullWidth   variant="text" 
       className={[classes.root, classes.btn].join(" ")}
-      onClick={() => setColor("#0069d9")} >
+      >
         Log out
       </Button>
 
       
       </Grid>
       </Grid>
-    </div>
-      </div>
+</div>
+     
     );
 };
 

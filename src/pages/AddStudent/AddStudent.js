@@ -5,40 +5,34 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  TextareaAutosize,
   Button,
   Grid,
-  alertClasses
-//   Input,
-//   Typography
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function AddStudentForm() {
+  const navigate = useNavigate()
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [className, setClassName] = useState('');
   const [division, setDivision] = useState('');
-  const [rollNumber, setRollNumber] = useState('');
+  const [rollNumber, setRollNumber] = useState(0);
   const [addressLine1, setAddressLine1] = useState('');
   const [addressLine2, setAddressLine2] = useState('');
   const [landmark, setLandmark] = useState('');
   const [city, setCity] = useState('');
-  const [pincode, setPincode] = useState('');
-  const [profilePicture, setProfilePicture] = useState(null);
-
-  
-
-
+  const [pincode, setPincode] = useState(0)
+ 
 
   function handleSubmit(event) {
     event.preventDefault();
-    // You can add code here
     const fullName =`${firstName} ${middleName} ${lastName} `;
     const classDevision =`${className}-${division}`
+
     const studentData = {
-    
-          
           fullName,
           classDevision,
             rollNumber,
@@ -48,7 +42,10 @@ function AddStudentForm() {
             city,
             pincode
     }
-    fetch("http://localhost:5000/add-student", {
+
+    // post 
+
+    fetch("https://stu-store-server.vercel.app/add-student", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -58,15 +55,14 @@ function AddStudentForm() {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert(`You have added a post successfully`);
+          alert(`You have added ${studentData?.fullName} successfully`);
+          navigate('/manage-student')
         
         } else {
          alert("Error");
         }
       })
       .catch((err) => alert(err));
- 
-
 
 }
 
@@ -82,6 +78,7 @@ function AddStudentForm() {
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={4}>
           <TextField
             label="Middle Name"
@@ -90,6 +87,7 @@ function AddStudentForm() {
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={4}>
           <TextField
             label="Last Name"
@@ -98,6 +96,7 @@ function AddStudentForm() {
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={4}>
           <FormControl fullWidth>
             <InputLabel id="class-label">Class</InputLabel>
@@ -109,7 +108,7 @@ function AddStudentForm() {
               {
               
               ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"].map(classNum =>(
-                <MenuItem key={classNum} value={classNum}>
+                <MenuItem key={classNum} value={classNum} >
                   {classNum}
                 </MenuItem>
               ))}
@@ -122,7 +121,6 @@ function AddStudentForm() {
         <InputLabel id="division-label">Division</InputLabel>
         <Select
           labelId="division-label"
-          
           value={division}
           onChange={event => setDivision(event.target.value)}
         >
@@ -133,18 +131,18 @@ function AddStudentForm() {
           ))}
         </Select>
       </FormControl>
-      </Grid> 
+      </Grid>
+      
       <Grid item xs={12} sm={4}>
       <TextField
         label="Roll Number"
         value={rollNumber}
         type='number'
-        onChange={event => setRollNumber(event.target.value)}
-      fullWidth
+        onChange={event =>
+          event.target.value.length <= 2 && setRollNumber(event.target.value)
+        }
         inputProps={{
-          min: "1",
-          max: "99",
-    
+          maxLength: 2
         }}
       />
       </Grid>
@@ -180,6 +178,7 @@ function AddStudentForm() {
         
       />
      </Grid>
+
      <Grid item xs={12} sm={4}>
       <TextField
         label="City"
@@ -189,6 +188,7 @@ function AddStudentForm() {
         
       />
       </Grid>
+
       <Grid item xs={12} sm={4}>
       <TextField
         label="Pincode"
@@ -204,20 +204,12 @@ function AddStudentForm() {
         
       />
       </Grid>
-      {/* <input
-        type="file"
-        value={profilePicture}
-        accept="image/*"
-        onChange={event => setProfilePicture(event.target.files[0])}
-      
-        
-      /> */}
-      <Grid>
-    <Button  onClick={handleSubmit} variant="contained" >Send</Button>
+   <Grid>
+      <Button style={{marginLeft:"15px", backgroundColor:"#f62f76"}}  onClick={handleSubmit} variant="contained" >Send</Button>
     </Grid>
       </Grid>
       </form>
       </div>
   )
-          }
-          export default AddStudentForm;
+}
+export default AddStudentForm;
