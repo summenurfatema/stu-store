@@ -52,7 +52,7 @@ const SideNav = () => {
         </Grid>
      
         <Grid  item xs={9}>
-          <Link style={{textDecoration:'none'}}  to='/'>
+          <Link style={{textDecoration:'none'}}  to='/manage-student'>
           <Button variant="text"fullWidth
       className={[classes.root, classes.pad,classes.btn].join(" ")}
       >

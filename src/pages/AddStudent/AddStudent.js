@@ -9,6 +9,7 @@ import {
   Grid,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -55,14 +56,14 @@ function AddStudentForm() {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert(`You have added ${studentData?.fullName} successfully`);
+        toast.success(`You have added ${studentData?.fullName} successfully`);
           navigate('/manage-student')
         
         } else {
          alert("Error");
         }
       })
-      .catch((err) => alert(err));
+      .catch((err) => toast.error(err));
 
 }
 

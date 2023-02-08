@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import Login  from "../pages/Login/Login";
 import UpdateStudent from "../pages/AddStudent/UpdateStudent";
 import ViewOnly from "../pages/ViewOnly/ViewOnly";
+import PrivateRoute from "./PrivateRoute";
 //import { Login } from "@mui/icons-material";
 
 export const router = createBrowserRouter([
@@ -13,16 +14,10 @@ export const router = createBrowserRouter([
 
     {
         path:'/',
-        element:<Main/>,
+        element:<PrivateRoute> <Main/> </PrivateRoute>,
         children:[
-            {
-                path:'/',
-                element:<Login/>,
-            },
-            {
-                path:'/signup',
-                element:<SignUp/>
-            },
+           
+            
             {
                 path:'/manage-student',
                 element:<StudentTable/>
@@ -44,7 +39,15 @@ export const router = createBrowserRouter([
             }
             
         ]
-    }
+    },
+    {
+        path:'/signup',
+        element:<SignUp/>
+    },
+    {
+        path:'/login',
+        element:<Login/>,
+    },
    
    
 ])

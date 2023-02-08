@@ -1,7 +1,7 @@
 import { Container} from "@mui/material";
 import React from "react";
 import { useContext } from "react";
-// import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate} from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -74,20 +74,16 @@ const SignUp = () => {
 
 
     if (password.length < 6) {
-      alert("Please enter at least 6 characters !!");
+      toast.error("Please enter at least 6 characters !!");
       return;
     }
     if (password !== confirm) {
-    alert("Please enter correct password !!");
+    toast.error("Please enter correct password !!");
       return;
     } else {
-      alert("Registration Successful !!!");
+      toast.success("Registration Successful !!!");
     }
- const user ={
-    "email": email,
-    "fullname":name
- }
- console.log(user);
+ 
 
     createUser(email, password)
             .then((result) => {
@@ -95,10 +91,10 @@ const SignUp = () => {
               console.log(user);
               form.reset();
             })
-             .then(() => {navigate("/");})
+             .then(() => {navigate("/login");})
               
             .catch((error) =>
-              alert(`${error}.Please  valid Email/Password`)
+            toast.error(`${error}.Please  valid Email/Password`)
             );
 
         }
@@ -197,7 +193,7 @@ const SignUp = () => {
           </Button>
           <Grid container className={classes.paragraph}>
            <Grid item>
-               <Link style={{textDecoration:"none"}} href="/login" variant="body2">
+               <Link style={{textDecoration:"none"}} to="/login" variant="body2">
                 Already have an account? Login here.
               </Link>
             </Grid>

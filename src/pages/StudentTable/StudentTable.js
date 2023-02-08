@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -43,7 +44,7 @@ useEffect(()=>{
     // handle delete 
 const handleDelete = (_id) => {
   const process = window.confirm(
-    "Are you ready to delete?"
+    "Are you confirm to delete?"
   );
   if (process) {
     fetch(`https://stu-store-server.vercel.app/student-data/${_id}`, {
@@ -52,7 +53,7 @@ const handleDelete = (_id) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
-          alert("This information is deleted");
+          toast.success("This information is deleted");
           
         }
       })
@@ -67,9 +68,9 @@ const handleDelete = (_id) => {
      <Table aria-label="simple table" className={classes.table} >
        <TableHead >
          <TableRow >
-           <TableCell align="right">Name</TableCell>
-           <TableCell align="right">Class</TableCell>
-           <TableCell align="right">Roll</TableCell>
+           <TableCell align="right">Student Name</TableCell>
+           <TableCell align="right">Class Name</TableCell>
+           <TableCell align="right">Roll Number</TableCell>
            <TableCell align="right">View / Edit / Delete</TableCell>
          </TableRow>
        </TableHead>

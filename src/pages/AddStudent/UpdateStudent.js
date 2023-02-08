@@ -1,5 +1,6 @@
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useState }  from 'react';
+import { toast } from 'react-hot-toast';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateStudent = () => {
@@ -43,7 +44,7 @@ console.log(studentData);
 
 //https://stu-store-server.vercel.app/updated-data
       fetch(
-        `http://localhost:5000/updated-data/${studentInfo._id}`,
+        `https://stu-store-server.vercel.app/updated-data/${studentInfo._id}`,
         {
           method: "PUT",
           headers: {
@@ -56,7 +57,7 @@ console.log(studentData);
         .then((data) => {
           if (data.modifiedCount > 0) {
 
-            alert('Data Updated Successfully')
+          toast.success('Data Updated Successfully')
             navigate('/manage-student')
           }
         })
